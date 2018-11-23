@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+ name: adhocnetworks
+ labels:
+  app: webtest
+
+spec:
+ containers:
+  - name: web1
+    image: nginx
+    ports:
+     - containerPort: 80
+    imagePullPolicy: IfNotPresent
+

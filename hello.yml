@@ -1,0 +1,13 @@
+---
+apiVersion: v1   # generally used in  type pod 
+kind: Pod          #  creating simply set of containers 
+metadata:          # to defind pod name
+ name: sample-pod
+
+spec:             #  define container related  things 
+ containers:
+  - image: nginx
+    name: hellocont
+    ports:
+     - containerPort: 80
+    imagePullPolicy: IfNotPresent 

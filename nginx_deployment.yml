@@ -1,0 +1,27 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+ name: adhoc-sitedep
+
+spec:
+ replicas: 2
+ minReadySeconds: 15
+ strategy: 
+  type: RollingUpdate # ensure zero downtime deployments when moving from current version to next version
+  rollingUpdate: 
+   maxUnavailable: 1  # only 1 pod is allowed to terminate during version update
+   maxSurge: 1      #  when update to new version only 1 pad can be added
+ template:
+  metadata:
+   labels:
+    app: webappsdep
+
+  spec:
+   containers:
+    - name: front-end
+      image: nginx:v1
+      ports:
+       - containerPort: 80
+      imagePullPolicy: IfNotPresent
+

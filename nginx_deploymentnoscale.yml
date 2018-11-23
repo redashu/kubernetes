@@ -1,0 +1,21 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+ name: adhoc-depone
+
+spec:
+ replicas: 2
+ template:
+  metadata:
+   labels:
+    app: webdeponelabel
+
+  spec:
+   containers:
+    - name: adhocdepcont
+      image: nginx
+      ports:
+       - containerPort: 80
+      imagePullPolicy: IfNotPresent
+

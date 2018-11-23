@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service      # service 1
+metadata:
+ name: adhocpodlb  # load of balancer name
+
+spec:
+ type: LoadBalancer 
+ ports:
+  - port: 81  #  client target 
+    protocol: TCP  #
+    targetPort: 80 #  container port number 
+ selector:
+  app: webappsdep  # label from pod
