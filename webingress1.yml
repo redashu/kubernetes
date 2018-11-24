@@ -1,0 +1,25 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-webingress1
+  labels:
+   app: web1
+
+spec:
+  containers:
+  - image: nginx
+    name: test-container1
+    ports:
+    - containerPort: 80
+    imagePullPolicy: IfNotPresent    
+    volumeMounts:
+    - mountPath: /usr/share/nginx/html
+      name: test-volume1
+  volumes:
+  - name: test-volume1
+    hostPath:
+      # directory location on host
+      path: /home/docker/podvol
+      # this field is optional
+      type: Directory
