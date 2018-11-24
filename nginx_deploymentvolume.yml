@@ -1,0 +1,34 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+ name: adhocdepvol
+
+spec:
+ replicas: 2
+ minReadySeconds: 15
+ strategy: 
+  type: RollingUpdate # ensure zero downtime deployments when moving from current version to next version
+  rollingUpdate: 
+   maxUnavailable: 1  # only 1 pod is allowed to terminate during version update
+   maxSurge: 1      #  when update to new version only 1 pad can be added
+ template:
+  metadata:
+   labels:
+    app: webappsdep
+
+  spec:
+   containers:
+    - name: volcont
+      image: nginx
+      ports:
+       - containerPort: 80
+      imagePullPolicy: IfNotPresent
+      volumeMounts:
+       - name: hostvolumee
+         mountPath: /usr/share/nginx/html
+   volumes:
+    - name: hostvolumee
+      hostPath:
+       path: /home/docker/volume  
+
